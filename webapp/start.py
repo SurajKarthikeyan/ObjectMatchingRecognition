@@ -15,15 +15,18 @@ def upload_file():
     if 'whole' in request.files and 'part' in request.files:
         whole = request.files['whole']
         part = request.files['part']
-        if whole:
+        if whole and part:
             wholename = secure_filename(whole.filename)
             wholepath = os.path.join(app.config['UPLOAD_FOLDER'], wholename)
             whole.save(wholepath)
-        if part:
+
             partname = secure_filename(part.filename)
             partpath = os.path.join(app.config['UPLOAD_FOLDER'], partname)
             part.save(partpath)
-        return render_template('display.html', whole_filename=wholename, part_filename=partname)
+
+            return render_template('display.html', whole_filename=wholename, part_filename=partname)
+        else:
+            return render_template('no_image.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
