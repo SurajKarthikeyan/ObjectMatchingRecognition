@@ -3,7 +3,7 @@ from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'webapp/static/uploads'
+UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 @app.route('/')
@@ -12,13 +12,18 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
-    if 'file' in request.files:
-        file = request.files['file']
-        if file:
-            filename = secure_filename(file.filename)
-            file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            file.save(file_path)
-            return render_template('display.html', image_filename=filename)
+    if 'whole' in request.files and 'part' in request.files:
+        whole = request.files['whole']
+        part = request.files['part']
+        if whole:
+            wholename = secure_filename(whole.filename)
+            wholepath = os.path.join(app.config['UPLOAD_FOLDER'], wholename)
+            whole.save(wholepath)
+        if part:
+            partname = secure_filename(part.filename)
+            partpath = os.path.join(app.config['UPLOAD_FOLDER'], partname)
+            part.save(partpath)
+        return render_template('display.html', whole_filename=wholename, part_filename=partname)
 
 if __name__ == '__main__':
     app.run(debug=True)
