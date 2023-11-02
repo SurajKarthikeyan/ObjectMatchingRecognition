@@ -2,19 +2,34 @@ from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 import os
 
+# Initial Setup
 app = Flask(__name__)
 UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+"""
+Starting function
+Takes nothing
+Loads home page
+"""
 @app.route('/')
 def index():
     return render_template('upload.html')
 
+
+"""
+Runs once both files have been uploaded and there has been a call to generate
+Takes request.files with (potentially) 'whole' and 'part'
+Loads upload.html
+"""
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    # unpacks request.files
     if 'whole' in request.files and 'part' in request.files:
         whole = request.files['whole']
         part = request.files['part']
+
+        # If both images have been uploaded
         if whole and part:
             wholename = secure_filename(whole.filename)
             wholepath = os.path.join(app.config['UPLOAD_FOLDER'], wholename)
@@ -25,6 +40,8 @@ def upload_file():
             part.save(partpath)
 
             return render_template('display.html', whole_filename=wholename, part_filename=partname)
+
+        # At least one of the images hasn't been uploaded
         else:
             return render_template('no_image.html')
 
