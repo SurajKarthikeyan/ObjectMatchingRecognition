@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 import os
+from BASNet import *
 
 # Initial Setup
 app = Flask(__name__)
@@ -14,11 +15,12 @@ Loads home page
 """
 @app.route('/')
 def index():
+    bas_start()
     return render_template('upload.html')
 
 
 """
-Runs once both files have been uploaded and there has been a call to generate
+Runs on call to generate
 Takes request.files with (potentially) 'whole' and 'part'
 Loads upload.html
 """
