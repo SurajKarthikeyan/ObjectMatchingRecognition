@@ -2,12 +2,8 @@
 BASnet file derived from basnet_demo.ipynb
 
 """
-
-from google.colab import drive
-import os
-import gdown
 from PIL import Image
-from IPython.display import display
+#from IPython.display import display
 
 """
 Runs on website open
@@ -15,7 +11,6 @@ Gets the pretrained weights
 """
 def bas_start():
     pass
-    drive.mount('/content/drive')
 
 """
 removes the background of the partial image
