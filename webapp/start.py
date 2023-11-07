@@ -5,7 +5,7 @@ from BASNet import *
 
 # Initial Setup
 app = Flask(__name__)
-UPLOAD_FOLDER = 'webapp/static/uploads'
+UPLOAD_FOLDER = 'static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 """
@@ -13,6 +13,7 @@ Starting function
 Takes nothing
 Loads home page
 """
+
 @app.route('/')
 def index():
     bas_start()
@@ -40,6 +41,9 @@ def upload_file():
             partname = secure_filename(part.filename)
             partpath = os.path.join(app.config['UPLOAD_FOLDER'], partname)
             part.save(partpath)
+
+            partbas = data_handle(partname)
+
 
             return render_template('display.html', whole_filename=wholename, part_filename=partname)
 
