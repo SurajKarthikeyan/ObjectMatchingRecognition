@@ -7,7 +7,7 @@
     <title>Uploaded Image</title>
 </head>
 <body>
-    <img src="{{ url_for('static', filename='uploads/' + part_filename) }}">
+    <img src="{{ url_for('static', filename=part_filename) }}">
     <img src="{{ url_for('static', filename='uploads/' + whole_filename) }}">
 </body>
 </html>

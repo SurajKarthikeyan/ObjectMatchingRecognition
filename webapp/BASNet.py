@@ -16,10 +16,10 @@ from torchvision import transforms  # , utils
 
 import numpy as np
 
-from models.master.model import BASNet
-from models.master.data_loader import SalObjDataset
-from models.master.data_loader import ToTensorLab
-from models.master.data_loader import RescaleT
+from models.BASNetMaster.model import BASNet
+from models.BASNetMaster.data_loader import SalObjDataset
+from models.BASNetMaster.data_loader import ToTensorLab
+from models.BASNetMaster.data_loader import RescaleT
 
 prediction_dir = 'static/BASNetMade/'
 
@@ -99,7 +99,7 @@ def data_handle(to_bas):
 
     img.save('static/BASNetMask/' + to_bas)
 
-    return 'static/BASNetMask/' + to_bas
+    return 'BASNetMask/' + to_bas
 
 
 """
@@ -109,7 +109,7 @@ Gets the pretrained weights
 
 
 def bas_start():
-    model_dir = 'models/master/saved_models/basnet_bsi/basnet.pth'  # pretrained model
+    model_dir = 'models/BASNetMaster/saved_models/basnet_bsi/basnet.pth'  # pretrained model
     print("...load BASNet...")
     net = BASNet(3, 1)
     net.load_state_dict(torch.load(model_dir))
@@ -118,30 +118,3 @@ def bas_start():
     net.eval()
     print("...BASNet Loaded...")
     return net
-
-
-"""
-removes the background of the partial image
-"""
-
-
-def remove_background():
-    pass
-
-
-"""
-Matches the partial image to the whole
-"""
-
-
-def add_matching():
-    pass
-
-
-"""
-Creates the final image to display
-"""
-
-
-def create_final_image():
-    pass

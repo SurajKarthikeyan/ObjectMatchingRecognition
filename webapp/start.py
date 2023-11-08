@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 import os
 from BASNet import *
+from KeypointMatch import *
 
 # Initial Setup
 app = Flask(__name__)
@@ -42,10 +43,13 @@ def upload_file():
             partpath = os.path.join(app.config['UPLOAD_FOLDER'], partname)
             part.save(partpath)
 
-            partbas = data_handle(partname)
+            # this line runs basnet
+            baspath = data_handle(partname)
 
+            # to do without basnet, pass in partpath instead of baspath
+            add_matching(baspath, wholepath)
 
-            return render_template('display.html', whole_filename=wholename, part_filename=partname)
+            return render_template('display.html', whole_filename=wholename, part_filename=baspath)
 
         # At least one of the images hasn't been uploaded
         else:
