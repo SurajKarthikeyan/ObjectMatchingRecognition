@@ -1,5 +1,6 @@
 from models.LightGlueMaster.lightglue.utils import load_image, rbd
 from config import *
+import time
 from models.LightGlueMaster.lightglue import viz2d
 
 """
@@ -21,10 +22,12 @@ def add_matching(part_path, whole_path, name="test"):
     ]  # remove batch dimension
 
     kpts0, kpts1, matches = feats0["keypoints"], feats1["keypoints"], matches01["matches"]
-    m_kpts0, m_kpts1 = kpts0[matches[..., 0]], kpts1[matches[..., 1]]
+    m_kpts0, m_kpts1 = kpts0[matches[..., 0]], kpts1[matches[..., 1]] # tensors array
     print("Finished keypoint matching")
-    #axes = viz2d.plot_images([partial_image, whole_image])
-    #viz2d.plot_matches(m_kpts0, m_kpts1, color="lime", lw=0.2, name="test")
+    axes = viz2d.plot_images([partial_image, whole_image])
+    viz2d.plot_matches(m_kpts0, m_kpts1, color="lime", lw=0.2, name="test")
+    viz2d.save_plot("webapp/static/MatchMakingLined/" + name + ".png")
+    print("Finished saving image")
 
 
 """

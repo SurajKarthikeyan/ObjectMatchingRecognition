@@ -153,7 +153,6 @@ def plot_matches(kpts0, kpts1, color=None, lw=1.5, ps=4, a=1.0, labels=None, axe
     if ps > 0:
         ax0.scatter(kpts0[:, 0], kpts0[:, 1], c=color, s=ps)
         ax1.scatter(kpts1[:, 0], kpts1[:, 1], c=color, s=ps)
-    fig.savefig("webapp/static/MatchMakingLined/" + name + ".png")
 
 def add_text(
     idx,
