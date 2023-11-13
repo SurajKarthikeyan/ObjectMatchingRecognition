@@ -40,7 +40,7 @@
 </div>
 <script>
     var video = document.querySelector("#videoElement");
-
+    const screenshotImage = document.createElement('img');
     if (navigator.mediaDevices.getUserMedia) {
       navigator.mediaDevices.getUserMedia({ video: true })
         .then(function (stream) {
@@ -65,13 +65,13 @@
         const dataURL = canvas.toDataURL('image/jpeg', 0.8);
 
         // Create an image element for the screenshot
-        const screenshotImage = document.createElement('img');
+        
         screenshotImage.src = dataURL;
         screenshotImage.width = 320; // Set a specific width for display (optional)
 
         // Append the image element to the document or do something else with the screenshot
-        document.body.appendChild(screenshotImage);
-    }
+        }
+    document.body.appendChild(screenshotImage);
 </script>
 </body>
 
