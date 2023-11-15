@@ -4,3 +4,6 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")  # 'mps', 
 
 extractor = SuperPoint(max_num_keypoints=2048).eval().to(device)  # load the extractor
 matcher = LightGlue(features="superpoint").eval().to(device)
+
+path_control = 'static/' #'webapp/static/'
+path_web = '' #'webapp/'
