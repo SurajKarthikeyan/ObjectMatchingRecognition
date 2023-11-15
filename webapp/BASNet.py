@@ -23,7 +23,9 @@ from models.BASNetMaster.data_loader import SalObjDataset
 from models.BASNetMaster.data_loader import ToTensorLab
 from models.BASNetMaster.data_loader import RescaleT
 
-prediction_dir = 'webapp/static/BASNetMade/'
+from config import *
+
+prediction_dir = path_control + 'BASNetMade/'
 
 
 def normPRED(d):
@@ -57,7 +59,7 @@ def save_output(image_name, pred, d_dir):
 
 
 def data_handle(to_bas):
-    image_list = ['webapp/static/uploads/' + to_bas]
+    image_list = [path_control + 'uploads/' + to_bas]
 
     # 1. dataload
     test_salobj_dataset = SalObjDataset(img_name_list=image_list, lbl_name_list=[],
@@ -92,14 +94,14 @@ def data_handle(to_bas):
         del d1, d2, d3, d4, d5, d6, d7, d8
 
     # 4. Mask Image
-    img_input = Image.open('webapp/static/uploads/' + to_bas)
+    img_input = Image.open(path_control + 'uploads/' + to_bas)
 
     empty = Image.new("RGBA", img_input.size, 0)
-    mask = Image.open('webapp/static/BASNetMade/' + to_bas[:-4] + '.png').convert("L")
-    ref = Image.open('webapp/static/uploads/' + to_bas)
+    mask = Image.open(path_control + 'BASNetMade/' + to_bas[:-4] + '.png').convert("L")
+    ref = Image.open(path_control + 'uploads/' + to_bas)
     img = Image.composite(ref, empty, mask)
 
-    img.save('webapp/static/BASNetMask/' + to_bas[:-4] + '.png')
+    img.save(path_control + 'BASNetMask/' + to_bas[:-4] + '.png')
 
     return 'BASNetMask/' + to_bas[:-4] + '.png'
 
@@ -111,7 +113,7 @@ Gets the pretrained weights
 
 
 def bas_start():
-    model_dir = 'webapp/models/BASNetMaster/saved_models/basnet_bsi/basnet.pth'  # pretrained model
+    model_dir = path_web + 'models/BASNetMaster/saved_models/basnet_bsi/basnet.pth'  # pretrained model
     print("...load BASNet...")
     net = BASNet(3, 1)
     net.load_state_dict(torch.load(model_dir))
