@@ -15,4 +15,67 @@
         <input type="submit" value="Generate">
     </form>
 </body>
+
+<style>
+    #container {
+    margin: 30px auto;
+    width: 500px;
+    height: 375px;
+    border: 10px #333 solid;
+    }
+    #videoElement {
+    width: 500px;
+    height: 375px;
+    background-color: #666;
+    }
+</style>
+
+<body>
+<div id="container">
+	<video autoplay="true" id="videoElement">
+	</video>
+    <br>
+	<button onclick="captureScreenshot()" style="margin: 15px;">Capture Screenshot</button>
+    <br>
+</div>
+<script>
+    var video = document.querySelector("#videoElement");
+    const screenshotImage = document.createElement('img');
+    if (navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          video.srcObject = stream;
+        })
+        .catch(function (error) {
+          console.log("Something went wrong!");
+        });
+    }
+
+        function captureScreenshot() {
+        // Create a canvas element to draw the screenshot
+        const canvas = document.createElement('canvas');
+        const context = canvas.getContext('2d');
+        canvas.width = videoElement.videoWidth;
+        canvas.height = videoElement.videoHeight;
+
+        // Draw the current frame from the video onto the canvas
+        context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+        // Convert the canvas content to a data URL with JPEG format and quality
+        const dataURL = canvas.toDataURL('image/jpeg', 1);
+
+        // Create an image element for the screenshot
+        
+        screenshotImage.src = dataURL;
+        screenshotImage.width = 320; // Set a specific width for display (optional)
+
+        // Append the image element to the document or do something else with the screenshot
+        }
+    document.body.appendChild(screenshotImage);
+</script>
+</body>
+
+
+
+
 </html>
