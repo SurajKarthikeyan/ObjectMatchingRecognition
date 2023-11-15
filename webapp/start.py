@@ -6,7 +6,7 @@ from KeypointMatch import *
 
 # Initial Setup
 app = Flask(__name__)
-UPLOAD_FOLDER = 'static/uploads'
+UPLOAD_FOLDER = 'webapp/static/uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 """
@@ -47,7 +47,7 @@ def upload_file():
             baspath = data_handle(partname)
 
             # to do without basnet, pass in partpath instead of baspath
-            add_matching(baspath, wholepath)
+            add_matching("webapp/static/"+baspath, wholepath)
 
             return render_template('display.html', whole_filename=wholename, part_filename=baspath)
 
