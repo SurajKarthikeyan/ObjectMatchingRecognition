@@ -1,3 +1,5 @@
+import torch
+
 from models.LightGlueMaster.lightglue.utils import load_image, rbd
 from config import *
 import time
@@ -39,6 +41,32 @@ def calculate_center(points, group):
     return torch.mean(group_points, dim=0)
 
 
+import cv2
+from PIL import Image
+import numpy as np
+
+
+def draw_transparent_circles_on_image(image: Image, circles: list) -> Image:
+    # Convert PIL image to OpenCV format
+    image_cv = np.array(image)
+    image_cv = cv2.cvtColor(image_cv, cv2.COLOR_RGB2BGR)
+
+    # Draw transparent circles on the image
+    for circle in circles:
+        circle_center, circle_radius = circle
+        overlay = image_cv.copy()
+        cv2.circle(overlay, circle_center, circle_radius, (0, 0, 255), -1)  # Red circle (BGR format)
+        alpha = 0.5  # Change the transparency level if needed
+        cv2.addWeighted(overlay, alpha, image_cv, 1 - alpha, 0, image_cv)
+
+    # Convert OpenCV format back to PIL
+    image_pil = Image.fromarray(cv2.cvtColor(image_cv, cv2.COLOR_BGR2RGB))
+    return image_pil
+
+
+import torch
+
+
 def add_matching(part_path, whole_path, name="test"):
     print(part_path)  # partial image path
     print(whole_path)  # image to compare against
@@ -61,30 +89,56 @@ def add_matching(part_path, whole_path, name="test"):
     # Set a threshold distance for grouping points
     threshold_distance = 100.0  # You can adjust this threshold
     threshold_group_size = 3
+    circle_radius = 20  # TEMP
 
+    centersL = []
     resultL = group_points(m_kpts0, threshold_distance)
     resultL = [group for group in resultL if len(group) >= threshold_group_size]
     print("Groups of points that are close to each other in left image:")
     for group in resultL:
-        print("")
         center_point = calculate_center(m_kpts0, group)
+        centersL.append(center_point)
         print("Center point:", center_point)
         print(m_kpts0[group])
+        print("")
+
+    print("Centers from Left Image: " + str(centersL))
 
     print("\n\n")
 
+    centersR = []
     resultR = group_points(m_kpts1, threshold_distance)
     resultR = [group for group in resultR if len(group) >= threshold_group_size]
     print("Groups of points that are close to each other in right image:")
     for group in resultR:
         center_point = calculate_center(m_kpts1, group)
-        print("")
+        centersR.append(center_point)
         print("Center point:", center_point)
         print(m_kpts1[group])
+        print("")
 
-    viz2d.plot_images([partial_image, whole_image])
-    viz2d.plot_matches(m_kpts0, m_kpts1, color="red", lw=0.2, name="test")
-    viz2d.save_plot(path_control + "MatchMakingLined/" + name + ".png")
+    print("Centers from Right Image: " + str(centersR))
+
+    # Draw circles
+
+    # Convert tensors to NumPy arrays
+    centersL_tup = [
+        tuple(int(coord) for coord in point.numpy()) for point in centersL
+    ]
+    centersR_tup = [
+        tuple(int(coord) for coord in point.numpy()) for point in centersR
+    ]
+
+    circles_listL = [(center, circle_radius) for center in centersL_tup]
+    circles_listR = [(center, circle_radius) for center in centersR_tup]
+
+    image_with_circlesL = draw_transparent_circles_on_image(Image.open(part_path), circles_listL)
+    image_with_circlesR = draw_transparent_circles_on_image(Image.open(whole_path), circles_listR)
+
+    image_with_circlesL.save(path_control + "MatchMakingOutput/" + "LeftImage" + ".png")
+    image_with_circlesR.save(path_control + "MatchMakingOutput/" + "RightImage" + ".png")
+
+
     print("Finished saving image")
 
 
