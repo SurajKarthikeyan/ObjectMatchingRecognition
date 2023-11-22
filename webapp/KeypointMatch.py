@@ -1,18 +1,16 @@
 import torch
-
+import math
 from models.LightGlueMaster.lightglue.utils import load_image, rbd
 from config import *
-import time
-from models.LightGlueMaster.lightglue import viz2d
-
+import cv2
+from PIL import Image
+import numpy as np
 """
 Matches the partial image to the whole
 """
 
-
 def distance(point1, point2):
     return torch.norm(point2 - point1)
-
 
 def group_points(points, threshold):
     groups = []
@@ -30,21 +28,29 @@ def group_points(points, threshold):
                     if distance(points[i], points[j]) <= threshold:
                         current_group.append(j)
                         visited.add(j)
-
             groups.append(current_group)
 
     return groups
 
-
-def calculate_center(points, group):
+def calculate_center_radius(points, group):
+    '''
+    This function take list of points and calculate center and radius of that points group
+    '''
+    furthest_point = [0, 0]
     group_points = points[group]
-    return torch.mean(group_points, dim=0)
+    center = torch.mean(group_points, dim=0).cpu().numpy()
+    center = tuple(int(coord) for coord in center)
+    # Find the furthest point from the center in the points group
+    for idx in group:
+        point = points[idx].cpu().numpy()
+        dist_x = abs(abs(point[0]) - abs(center[0]))
+        dist_y = abs(abs(point[1]) - abs(center[1]))
+        if dist_x > furthest_point[0]: furthest_point[0] = point[0]
+        if dist_y > furthest_point[1]: furthest_point[1] = point[1]
 
-
-import cv2
-from PIL import Image
-import numpy as np
-
+    # calculate the radius sqrt((x2-x1) ^2 + (y2-y1) ^2)
+    radius = math.sqrt((furthest_point[0] - center[0])**2 + (furthest_point[1] - center[1])**2)
+    return center, int(radius)
 
 def draw_transparent_circles_on_image(image: Image, circles: list) -> Image:
     # Convert PIL image to OpenCV format
@@ -62,10 +68,6 @@ def draw_transparent_circles_on_image(image: Image, circles: list) -> Image:
     # Convert OpenCV format back to PIL
     image_pil = Image.fromarray(cv2.cvtColor(image_cv, cv2.COLOR_BGR2RGB))
     return image_pil
-
-
-import torch
-
 
 def add_matching(part_path, whole_path, name="test"):
     print(part_path)  # partial image path
@@ -87,65 +89,39 @@ def add_matching(part_path, whole_path, name="test"):
 
     # lets get jiggy with it
     # Set a threshold distance for grouping points
-    threshold_distance = 100.0  # You can adjust this threshold
+    threshold_distance = 500.0  # You can adjust this threshold
     threshold_group_size = 3
-    circle_radius = 20  # TEMP
 
-    centersL = []
     resultL = group_points(m_kpts0, threshold_distance)
+    print(resultL)
     resultL = [group for group in resultL if len(group) >= threshold_group_size]
-    print("Groups of points that are close to each other in left image:")
+    circles_listL = []
+    # print("Groups of points that are close to each other in left image:")
     for group in resultL:
-        center_point = calculate_center(m_kpts0, group)
-        centersL.append(center_point)
-        print("Center point:", center_point)
-        print(m_kpts0[group])
-        print("")
+        result_tup = calculate_center_radius(m_kpts0, group)
+        circles_listL.append(result_tup)
 
-    print("Centers from Left Image: " + str(centersL))
-
-    print("\n\n")
-
-    centersR = []
     resultR = group_points(m_kpts1, threshold_distance)
+    print(resultR)
     resultR = [group for group in resultR if len(group) >= threshold_group_size]
-    print("Groups of points that are close to each other in right image:")
+    circles_listR = []
+    # print("Groups of points that are close to each other in right image:")
     for group in resultR:
-        center_point = calculate_center(m_kpts1, group)
-        centersR.append(center_point)
-        print("Center point:", center_point)
-        print(m_kpts1[group])
-        print("")
-
-    print("Centers from Right Image: " + str(centersR))
+        result_tup = calculate_center_radius(m_kpts1, group)
+        circles_listR.append(result_tup)
 
     # Draw circles
-
-    # Convert tensors to NumPy arrays
-    centersL_tup = [
-        tuple(int(coord) for coord in point.numpy()) for point in centersL
-    ]
-    centersR_tup = [
-        tuple(int(coord) for coord in point.numpy()) for point in centersR
-    ]
-
-    circles_listL = [(center, circle_radius) for center in centersL_tup]
-    circles_listR = [(center, circle_radius) for center in centersR_tup]
-
     image_with_circlesL = draw_transparent_circles_on_image(Image.open(part_path), circles_listL)
     image_with_circlesR = draw_transparent_circles_on_image(Image.open(whole_path), circles_listR)
 
     image_with_circlesL.save(path_control + "MatchMakingOutput/" + "LeftImage" + ".png")
     image_with_circlesR.save(path_control + "MatchMakingOutput/" + "RightImage" + ".png")
 
-
     print("Finished saving image")
-
 
 """
 Creates the final image to display
 """
-
 
 def create_final_image():
     pass
