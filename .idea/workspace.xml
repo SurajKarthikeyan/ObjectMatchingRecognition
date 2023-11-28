@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7413a4fd-4670-42a7-8cdc-efced5f707cb" name="Changes" comment="Generating BASNet works correctly" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" show_ignored="true" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2XcuOMVqP70FjiRz5eiXtQAUeXh" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/samue/Documents/ClassesFallMasters/CSE803/webapp/webapp&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\samue\Documents\ClassesFallMasters\CSE803\webapp\webapp\static\predictions" />
+      <recent name="C:\Users\samue\Documents\ClassesFallMasters\CSE803\webapp\webapp\files\predictions" />
+      <recent name="C:\Users\samue\Documents\ClassesFallMasters\CSE803\webapp\webapp\Models\BASNet\sample_destination" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\samue\Documents\ClassesFallMasters\CSE803\webapp\webapp" />
+      <recent name="C:\Users\samue\Documents\ClassesFallMasters\CSE803\webapp\webapp\static" />
+      <recent name="C:\Users\samue\Documents\ClassesFallMasters\CSE803\webapp\webapp\static\predictions" />
+      <recent name="C:\Users\samue\Documents\ClassesFallMasters\CSE803\webapp\webapp\files" />
+      <recent name="C:\Users\samue\Documents\ClassesFallMasters\CSE803\webapp\webapp\Models\BASNet" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.webapp">
+    <configuration name="display.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/webapp/webapp/templates/display.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="upload.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/webapp/webapp/templates/upload.html" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <configuration name="basnet_test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="webapp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webapp/Models/BASNet" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webapp/Models/BASNet/basnet_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="basnet_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="webapp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Models/BASNet" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Models/BASNet/basnet_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="start" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="webapp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\samue\anaconda3\envs\fall_23_project\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webapp" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webapp/start.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="webapp" type="PythonConfigurationType" factoryName="Python">
+      <module name="webapp" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/webapp/start.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.upload.html" />
+        <item itemvalue="JavaScript Debug.display.html" />
+        <item itemvalue="Python.basnet_test (1)" />
+        <item itemvalue="Python.basnet_test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7413a4fd-4670-42a7-8cdc-efced5f707cb" name="Changes" comment="" />
+      <created>1698940656238</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698940656238</updated>
+      <workItem from="1698940658922" duration="161000" />
+      <workItem from="1698940833590" duration="18000" />
+      <workItem from="1698940918112" duration="17225000" />
+      <workItem from="1699027706601" duration="7130000" />
+      <workItem from="1699386565098" duration="1030000" />
+      <workItem from="1699397031131" duration="2646000" />
+      <workItem from="1699907570615" duration="2749000" />
+      <workItem from="1700604410730" duration="10000" />
+      <workItem from="1701211019085" duration="11000" />
+    </task>
+    <task id="LOCAL-00001" summary="Now shows two images at once">
+      <created>1698941439223</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698941439223</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Added error page for not having both images">
+      <created>1698942382792</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698942382792</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adding comments and simplifying">
+      <created>1698943026359</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698943026359</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Creating BASNet file and empty functions">
+      <created>1698944687289</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698944687289</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Implements BASNet on (ostensibly) no files, but it is run in basnet_test.py">
+      <created>1698955464233</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698955464233</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Implements BASNet on (ostensibly) no files, but it is run in basnet_test.py (rejected?)">
+      <created>1698955619754</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698955619754</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Implements BASNet on (ostensibly) no files, but it is run in basnet_test.py (rejected?)">
+      <created>1698955690054</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698955690054</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Implements BASNet on (ostensibly) no files, but it is run in basnet_test.py (rejected?)">
+      <created>1698955928926</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698955928926</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Implements BASNet on (ostensibly) no files, but it is run in basnet_test.py (rejected?)">
+      <created>1698956032118</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1698956032118</updated>
+    </task>
+    <task id="LOCAL-00010" summary="BASNet works">
+      <created>1698965411525</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1698965411525</updated>
+    </task>
+    <task id="LOCAL-00011" summary="deleted pretrained weights because they are too big">
+      <created>1698965543161</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1698965543161</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Trying to link up BASNet and the website">
+      <created>1699036919302</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1699036919302</updated>
+    </task>
+    <task id="LOCAL-00013" summary="The first image is now always displayed as an outline and the second image is always displayed as is">
+      <created>1699043386461</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1699043386461</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Generating BASNet works correctly">
+      <created>1699400325907</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1699400325907</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Now shows two images at once" />
+    <MESSAGE value="Added error page for not having both images" />
+    <MESSAGE value="Adding comments and simplifying" />
+    <MESSAGE value="Creating BASNet file and empty functions" />
+    <MESSAGE value="Implements BASNet on (ostensibly) no files, but it is run in basnet_test.py" />
+    <MESSAGE value="Implements BASNet on (ostensibly) no files, but it is run in basnet_test.py (rejected?)" />
+    <MESSAGE value="BASNet works" />
+    <MESSAGE value="deleted pretrained weights because they are too big" />
+    <MESSAGE value="Trying to link up BASNet and the website" />
+    <MESSAGE value="The first image is now always displayed as an outline and the second image is always displayed as is" />
+    <MESSAGE value="Generating BASNet works correctly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Generating BASNet works correctly" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/webapp$start.coverage" NAME="start Coverage Results" MODIFIED="1699907747102" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webapp" />
+    <SUITE FILE_PATH="coverage/webapp$basnet_test.coverage" NAME="basnet_test Coverage Results" MODIFIED="1698954202216" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Models/BASNet" />
+    <SUITE FILE_PATH="coverage/webapp$basnet_test__1_.coverage" NAME="basnet_test (1) Coverage Results" MODIFIED="1699025385763" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/webapp/Models/BASNet" />
+  </component>
+</project>
