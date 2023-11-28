@@ -14,7 +14,20 @@
         <input type="file" name="whole">
         <input type="submit" value="Generate">
     </form>
+
+    <link  href="../cropperjs/cropper.css" rel="stylesheet">
+<div class="container">
+    <div>
+        <img id="testimage" class="croppingimage" src="../static/uploads/eyespy5.png">
+    </div>
+</div>
+
 </body>
+
+<script>
+    src="../cropperjs/cropper.min.js"
+</script>
+<script> src="cropping.js"</script>
 
 <style>
     #container {
@@ -27,6 +40,13 @@
     width: 500px;
     height: 375px;
     background-color: #666;
+    }
+
+    .croppingimage {
+        display: block;
+        width: 100px;
+        height: 100px;
+        max-width: 100%;
     }
 </style>
 
