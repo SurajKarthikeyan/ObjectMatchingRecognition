@@ -6,6 +6,8 @@
 <html>
 <head>
     <title>File Upload</title>
+    <link href="../cropperjs/cropper.css" rel="stylesheet">
+    <script type="module" src="../cropperjs/cropper.js"></script>
 </head>
 <body>
     <form method="POST" action="/upload" enctype="multipart/form-data">
@@ -19,15 +21,15 @@
 <div class="container">
     <div>
         <img id="testimage" class="croppingimage" src="../static/uploads/eyespy5.png">
+        <button onclick="crop()" style="margin: 15px;">Crop</button>
+    </div>
+
+    <div>
+        <img id="output" class="croppingoutput" src="">
     </div>
 </div>
 
 </body>
-
-<script>
-    src="../cropperjs/cropper.min.js"
-</script>
-<script> src="cropping.js"</script>
 
 <style>
     #container {
@@ -47,6 +49,10 @@
         width: 100px;
         height: 100px;
         max-width: 100%;
+    }
+
+    .croppingoutput{
+        margin: 5px;
     }
 </style>
 
@@ -92,6 +98,20 @@
         // Append the image element to the document or do something else with the screenshot
         }
     document.body.appendChild(screenshotImage);
+    var cropman;
+    document.addEventListener('DOMContentLoaded', function () {
+        // Wrap your code in this event listener
+
+        const image = document.querySelector('.croppingimage');
+        cropman = new Cropper(image, {
+            aspectRatio: 0,
+            viewMode: 0,
+        });
+    });
+    function crop() {
+        var croppedImage = cropman.getCroppedCanvas().toDataURL("image/png");
+        document.getElementById('output').src = croppedImage;
+    }
 </script>
 </body>
 
