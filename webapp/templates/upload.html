@@ -1,122 +1,185 @@
-<!-- Initally displayed file -->
-<!-- Gives two variables: part, whole -->
-<!-- calls /upload when "Upload" is pressed -->
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>File Upload</title>
     <link href="../static/cropperjs/cropper.css" rel="stylesheet">
     <script type="module" src="../static/cropperjs/cropper.js"></script>
 </head>
+
 <body>
     <form method="POST" action="/upload" enctype="multipart/form-data">
         <!-- Partial Image, Whole Image, Upload button-->
-        <input type="file" name="part" onchange = "enableScreenshotButton()">
-        <input type="file" name="whole">
+        <input type="file" name="whole" onchange="enableScreenshotButton()">
         <input type="submit" value="Generate">
     </form>
 
-    <link href="../static/cropperjs/cropper.css" rel="stylesheet">
-<div class="container">
-    <div>
-        <img id="testimage" class="croppingimage" src="../static/uploads/eyespy5.png">
-        <button onclick="crop()" style="margin: 15px;">Crop</button>
+    <div class="container" id="cropperContainer" style="display: none; position: absolute; top: 0; left: 0; width: 500px; height: 375px;">
+        <div>
+            <img id="testimage" class="croppingimage" src="../static/uploads/eyespy5.png">
+            <button onclick="crop()" style="margin: 15px;">Crop</button>
+            <button onclick="saveCroppedImage()" style="margin: 15px;">Save Cropped Image</button>
+        </div>
+
+        <div>
+            <img id="output" class="croppingoutput" src="">
+        </div>
     </div>
 
-    <div>
-        <img id="output" class="croppingoutput" src="">
+    <style>
+        #container {
+            margin: 30px auto;
+            width: 500px;
+            height: 375px;
+            border: 10px #333 solid;
+            position: relative;
+        }
+
+        #videoElement {
+            width: 500px;
+            height: 375px;
+            background-color: #666;
+        }
+
+        .croppingimage {
+            display: block;
+            width: 500px;
+            height: 375px;
+            max-width: 100%;
+        }
+
+        .croppingoutput {
+            margin: 5px;
+        }
+    </style>
+
+    <div id="container" style="position: relative;">
+        <video autoplay="true" id="videoElement"></video>
+        <br>
+        <button id="screenshotButton" onclick="captureScreenshot()" style="margin: 15px;">Capture Screenshot</button>
+        <br>
     </div>
-</div>
 
-</body>
+    <script>
+        document.getElementById('screenshotButton').disabled = true;
+        var videoElement = document.querySelector("#videoElement");
+        const screenshotImage = document.createElement('img');
+        var cropman = null;
 
-<style>
-    #container {
-    margin: 30px auto;
-    width: 500px;
-    height: 375px;
-    border: 10px #333 solid;
-    }
-    #videoElement {
-    width: 500px;
-    height: 375px;
-    background-color: #666;
-    }
-
-    .croppingimage {
-        display: block;
-        width: 100px;
-        height: 100px;
-        max-width: 100%;
-    }
-
-    .croppingoutput{
-        margin: 5px;
-    }
-</style>
-
-<body>
-<div id="container">
-	<video autoplay="true" id="videoElement">
-	</video>
-    <br>
-	<button id = screenshotButton onclick="captureScreenshot()" style="margin: 15px;">Capture Screenshot</button>
-    <br>
-</div>
-<script>
-    document.getElementById('screenshotButton').disabled = true;
-    var video = document.querySelector("#videoElement");
-    const screenshotImage = document.createElement('img');
-    if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          video.srcObject = stream;
-        })
-        .catch(function (error) {
-          console.log("Something went wrong!");
-        });
-    }
+        if (navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    videoElement.srcObject = stream;
+                })
+                .catch(function (error) {
+                    console.log("Something went wrong!");
+                });
+        }
 
         function captureScreenshot() {
-        // Create a canvas element to draw the screenshot
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        canvas.width = videoElement.videoWidth;
-        canvas.height = videoElement.videoHeight;
+            const containerRect = document.getElementById('container').getBoundingClientRect();
+            const cropperContainer = document.getElementById('cropperContainer');
+            cropperContainer.style.display = 'block';
+            cropperContainer.style.top = containerRect.top + 'px';
+            cropperContainer.style.left = containerRect.left + 'px';
+            cropperContainer.style.width = containerRect.width + 'px';
+            cropperContainer.style.height = containerRect.height + 'px';
 
-        // Draw the current frame from the video onto the canvas
-        context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+            // Create a canvas element to draw the screenshot
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = videoElement.videoWidth;
+            canvas.height = videoElement.videoHeight;
 
-        // Convert the canvas content to a data URL with JPEG format and quality
-        const dataURL = canvas.toDataURL('image/jpeg', 1);
+            // Draw the current frame from the video onto the canvas
+            context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
-        // Create an image element for the screenshot
+            // Convert the canvas content to a data URL with JPEG format and quality
+            const dataURL = canvas.toDataURL('image/jpeg', 1);
 
-        screenshotImage.src = dataURL;
-        screenshotImage.width = 320; // Set a specific width for display (optional)
+            // Create an image element for the screenshot
+            screenshotImage.src = dataURL;
+            screenshotImage.width = containerRect.width; // Set the width to the container's width
 
-        // Append the image element to the document or do something else with the screenshot
+            // Destroy the current Cropper instance
+            if (cropman) {
+                cropman.destroy();
+            }
+
+            // Create a new Cropper instance with the screenshot image source
+            const image = document.querySelector('.croppingimage');
+            cropman = new Cropper(image, {
+                aspectRatio: 0,
+                viewMode: 0,
+            });
+
+            // Replace the image in the Cropper instance with the screenshot image
+            cropman.replace(dataURL);
+
+            // Overlay the cropper on the entire body
+            document.body.appendChild(cropperContainer);
         }
-    document.body.appendChild(screenshotImage);
-    var cropman;
-    document.addEventListener('DOMContentLoaded', function () {
-        // Wrap your code in this event listener
 
-        const image = document.querySelector('.croppingimage');
-        cropman = new Cropper(image, {
-            aspectRatio: 0,
-            viewMode: 0,
-        });
-    });
-    function crop() {
-        var croppedImage = cropman.getCroppedCanvas().toDataURL("image/png");
-        document.getElementById('output').src = croppedImage;
-    }
+        function crop() {
+            var imageSource;
 
-    function enableScreenshotButton(){
-        document.getElementById('screenshotButton').disabled = false;
-    }
-</script>
+            if (screenshotImage.src) {
+                // If screenshotImage is defined, use it
+                imageSource = screenshotImage.src;
+            } else {
+                // Use the default eyespye image source
+                imageSource = document.getElementById('testimage').src;
+            }
+
+            const image = document.querySelector('.croppingimage');
+
+            // Destroy the current Cropper instance
+            if (cropman) {
+                cropman.destroy();
+            }
+
+            // Create a new Cropper instance with the updated image source
+            cropman = new Cropper(image, {
+                aspectRatio: 0,
+                viewMode: 0,
+            });
+
+            // Replace the image in the Cropper instance
+            cropman.replace(imageSource);
+        }
+
+        function enableScreenshotButton() {
+            document.getElementById('screenshotButton').disabled = false;
+        }
+
+        function saveCroppedImage() {
+
+            // Get the cropped image data
+            const croppedImageData = cropman.getCroppedCanvas().toDataURL('image/jpeg', 1);
+
+            // Convert the base64 data to a Blob
+            const byteCharacters = atob(croppedImageData.split(',')[1]);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'image/jpeg' });
+
+            // Create a FormData object and append the Blob
+            const formData = new FormData();
+            formData.append('cropped_image', blob, 'cropped_image.jpg');
+
+            // Send the FormData to the server using Fetch API
+            fetch('/save_cropped_image', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.text())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
 </body>
+
 </html>
