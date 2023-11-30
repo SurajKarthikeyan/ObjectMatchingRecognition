@@ -12,7 +12,7 @@
 <body>
     <form method="POST" action="/upload" enctype="multipart/form-data">
         <!-- Partial Image, Whole Image, Upload button-->
-        <input type="file" name="part">
+        <input type="file" name="part" onchange = "enableScreenshotButton()">
         <input type="file" name="whole">
         <input type="submit" value="Generate">
     </form>
@@ -61,10 +61,11 @@
 	<video autoplay="true" id="videoElement">
 	</video>
     <br>
-	<button onclick="captureScreenshot()" style="margin: 15px;">Capture Screenshot</button>
+	<button id = screenshotButton onclick="captureScreenshot()" style="margin: 15px;">Capture Screenshot</button>
     <br>
 </div>
 <script>
+    document.getElementById('screenshotButton').disabled = true;
     var video = document.querySelector("#videoElement");
     const screenshotImage = document.createElement('img');
     if (navigator.mediaDevices.getUserMedia) {
@@ -111,6 +112,10 @@
     function crop() {
         var croppedImage = cropman.getCroppedCanvas().toDataURL("image/png");
         document.getElementById('output').src = croppedImage;
+    }
+
+    function enableScreenshotButton(){
+        document.getElementById('screenshotButton').disabled = false;
     }
 </script>
 </body>
