@@ -70,9 +70,6 @@ def draw_transparent_circles_on_image(image: Image, circles: list) -> Image:
     return image_pil
 
 def add_matching(part_path, whole_path, name="test"):
-    print(part_path)  # partial image path
-    print(whole_path)  # image to compare against
-
     partial_image = load_image(part_path)
     whole_image = load_image(whole_path)
 
@@ -89,11 +86,11 @@ def add_matching(part_path, whole_path, name="test"):
 
     # lets get jiggy with it
     # Set a threshold distance for grouping points
-    threshold_distance = 500.0  # You can adjust this threshold
+    threshold_distance = 1000.0  # You can adjust this threshold
     threshold_group_size = 3
 
     resultL = group_points(m_kpts0, threshold_distance)
-    print(resultL)
+    #print(resultL)
     resultL = [group for group in resultL if len(group) >= threshold_group_size]
     circles_listL = []
     # print("Groups of points that are close to each other in left image:")
@@ -102,7 +99,7 @@ def add_matching(part_path, whole_path, name="test"):
         circles_listL.append(result_tup)
 
     resultR = group_points(m_kpts1, threshold_distance)
-    print(resultR)
+    #print(resultR)
     resultR = [group for group in resultR if len(group) >= threshold_group_size]
     circles_listR = []
     # print("Groups of points that are close to each other in right image:")

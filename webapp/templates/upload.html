@@ -6,8 +6,8 @@
 <html>
 <head>
     <title>File Upload</title>
-    <link href="../cropperjs/cropper.css" rel="stylesheet">
-    <script type="module" src="../cropperjs/cropper.js"></script>
+    <link href="../static/cropperjs/cropper.css" rel="stylesheet">
+    <script type="module" src="../static/cropperjs/cropper.js"></script>
 </head>
 <body>
     <form method="POST" action="/upload" enctype="multipart/form-data">
@@ -17,7 +17,7 @@
         <input type="submit" value="Generate">
     </form>
 
-    <link  href="../cropperjs/cropper.css" rel="stylesheet">
+    <link href="../static/cropperjs/cropper.css" rel="stylesheet">
 <div class="container">
     <div>
         <img id="testimage" class="croppingimage" src="../static/uploads/eyespy5.png">
@@ -91,7 +91,7 @@
         const dataURL = canvas.toDataURL('image/jpeg', 1);
 
         // Create an image element for the screenshot
-        
+
         screenshotImage.src = dataURL;
         screenshotImage.width = 320; // Set a specific width for display (optional)
 
@@ -114,8 +114,4 @@
     }
 </script>
 </body>
-
-
-
-
 </html>
