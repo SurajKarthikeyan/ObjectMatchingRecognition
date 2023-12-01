@@ -1,0 +1,5 @@
+node_modules
+package-lock.json
+package.json
+webapp/models/BASNetMaster/saved_models/basnet_bsi/basnet.pth
+webapp/static/cropperjs
