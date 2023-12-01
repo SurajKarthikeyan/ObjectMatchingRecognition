@@ -32,10 +32,9 @@ Loads upload.html
 @app.route('/upload', methods=['POST'])
 def upload_file():
     # unpacks request.files
-    if 'whole' in request.files and 'part' in request.files:
+    if 'whole' in request.files:
         whole = request.files['whole']
-        part = request.files['part']
-
+        part = Image.open(path_control + 'uploads/cropped_image.jpg')
         # If both images have been uploaded
         if whole and part:
             wholename = secure_filename(whole.filename)
@@ -57,6 +56,15 @@ def upload_file():
         # At least one of the images hasn't been uploaded
         else:
             return render_template('no_image.html')
+
+@app.route('/save_cropped_image', methods=['POST'])
+def save_cropped_image():
+    cropped_image = request.files['cropped_image']
+
+    # Save the cropped image to the server's file system
+    cropped_image.save(os.path.join('static/uploads', 'cropped_image.jpg'))
+
+    return 'Cropped image saved successfully!'
 
 if __name__ == '__main__':
     app.run(debug=True)
