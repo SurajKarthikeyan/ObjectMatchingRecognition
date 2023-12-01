@@ -26,6 +26,5 @@ def scale_image(img, max_width, max_height):
         new_width = int(new_height * aspect_ratio)
 
     # Resize the image
-    resized_img = img.resize((new_width, new_height), Image.ANTIALIAS)
-
+    resized_img = img.resize((new_width, new_height))
     return resized_img
