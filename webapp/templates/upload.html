@@ -8,16 +8,30 @@
 </head>
 
 <body>
-    <form method="POST" action="/upload" enctype="multipart/form-data">
+    <div style="text-align:center;">
+        <h1> Live Environment Object Recognition Prototype </h1>
+        <h1 id = "loading" style = "display: None;"> Loading... Please Be Patient! </h1>
+    </div>
+
+    <div id = "description">
+        <p>This program will take a live image in the video feed shown on this page.</p>
+        <p> It uses your default webcam so please make sure to have one connected. </p>
+        <p>  1) Upload an image that you would like to compare against using the button below.</p>
+        <p>  2) Click capture screenshot, and it will capture your current camera view.</p>
+        <p>  3) Using the cropping tool, select the portion containing the object you would like to compare to your uploaded file.</p>
+        <p>  4) Click Save Cropped Image when you are satisfied, and then generate to run the program.</p>
+    </div>
+
+    <form method="POST" action="/upload" enctype="multipart/form-data" id = "generateSection">
         <!-- Partial Image, Whole Image, Upload button-->
         <input type="file" name="whole" onchange="enableScreenshotButton()">
-        <input type="submit" value="Generate">
+        <input id = "generateButton" type="submit" value="Generate" onclick="enableLoading()">
     </form>
 
     <div class="container" id="cropperContainer" style="display: none; position: absolute; top: 0; left: 0; width: 500px; height: 375px;">
         <div>
             <img id="testimage" class="croppingimage" src="../static/uploads/eyespy5.png">
-            <button onclick="crop()" style="margin: 15px;">Crop</button>
+<!--            <button onclick="crop()" style="margin: 15px;">Crop</button>-->
             <button onclick="saveCroppedImage()" style="margin: 15px;">Save Cropped Image</button>
         </div>
 
@@ -62,6 +76,7 @@
 
     <script>
         document.getElementById('screenshotButton').disabled = true;
+        document.getElementById('generateButton').disabled = true;
         var videoElement = document.querySelector("#videoElement");
         const screenshotImage = document.createElement('img');
         var cropman = null;
@@ -151,7 +166,17 @@
         function enableScreenshotButton() {
             document.getElementById('screenshotButton').disabled = false;
         }
+        function enableGenerateButton() {
+            document.getElementById('generateButton').disabled = false;
+        }
 
+        function enableLoading(){
+            document.getElementById('loading').style.display = "block";
+            document.getElementById('generateSection').style.display = "None";
+            document.getElementById('description').style.display = "None";
+            document.getElementById('cropperContainer').style.display = "None";
+            document.getElementById('container').style.display = "None";
+        }
         function saveCroppedImage() {
 
             // Get the cropped image data
@@ -178,6 +203,8 @@
             .then(response => response.text())
             .then(data => console.log(data))
             .catch(error => console.error('Error:', error));
+
+            enableGenerateButton();
         }
     </script>
 </body>

@@ -4,7 +4,7 @@ import os
 from BASNet import *
 from KeypointMatch import *
 
-from config import path_control
+from config import *
 
 # Initial Setup
 app = Flask(__name__)
@@ -49,9 +49,10 @@ def upload_file():
             baspath = data_handle(partname)
 
             # to do without basnet, pass in partpath instead of baspath
-            add_matching(path_control+baspath, wholepath)
-
-            return render_template('display.html', whole_filename=wholename, part_filename=baspath)
+            match_path = add_matching(path_control+baspath, wholepath)
+            print(match_path, wholepath)
+            print(baspath, partpath)
+            return render_template('display.html', whole_filename=match_path, part_filename='uploads/cropped_image.jpg')
 
         # At least one of the images hasn't been uploaded
         else:
@@ -60,7 +61,8 @@ def upload_file():
 @app.route('/save_cropped_image', methods=['POST'])
 def save_cropped_image():
     cropped_image = request.files['cropped_image']
-
+    # resize image here
+    #resized_img = scale_image(cropped_image, 500, 500)
     # Save the cropped image to the server's file system
     cropped_image.save(os.path.join('static/uploads', 'cropped_image.jpg'))
 

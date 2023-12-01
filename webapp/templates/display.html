@@ -7,7 +7,14 @@
     <title>Uploaded Image</title>
 </head>
 <body>
-    <img src="{{ url_for('static', filename=part_filename) }}">
-    <img src="{{ url_for('static', filename='uploads/' + whole_filename) }}">
+    <div style="text-align:center;">
+        <h1> Comparison Result </h1>
+    </div>
+    <div style="text-align:center;">
+        <img src="{{ url_for('static', filename=part_filename) }}">
+    </div>
+    <div style="text-align:center;">
+        <img src="{{ url_for('static', filename=whole_filename) }}">
+    </div>
 </body>
 </html>

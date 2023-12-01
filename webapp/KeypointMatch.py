@@ -1,4 +1,3 @@
-import torch
 import math
 from models.LightGlueMaster.lightglue.utils import load_image, rbd
 from config import *
@@ -67,6 +66,7 @@ def draw_transparent_circles_on_image(image: Image, circles: list) -> Image:
 
     # Convert OpenCV format back to PIL
     image_pil = Image.fromarray(cv2.cvtColor(image_cv, cv2.COLOR_BGR2RGB))
+    image_pil = scale_image(image_pil, 800, 800)
     return image_pil
 
 def add_matching(part_path, whole_path, name="test"):
@@ -115,6 +115,7 @@ def add_matching(part_path, whole_path, name="test"):
     image_with_circlesR.save(path_control + "MatchMakingOutput/" + "RightImage" + ".png")
 
     print("Finished saving image")
+    return "MatchMakingOutput/" + "RightImage" + ".png"
 
 """
 Creates the final image to display
